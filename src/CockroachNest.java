@@ -5,17 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 public class CockroachNest {
-        private Graph graph;
+        private Graph   graph;
         private int[][] currentSolution;
-        private int numOfCockroaches = 200;
-        private int numOfPoints;
-        private int numOfIterations = 100;
-        private int visibilityRange = 3;
-        private int stepLength = 2;
-        private int[] globalMinimum;
-        private int minIteration = 0;
-        private int currentIteration;
+        private int     numOfCockroaches = 200;
+        private int     numOfPoints;
+        private int     numOfIterations = 100;
+        private int     visibilityRange = 3;
+        private int     stepLength = 2;
+        private int[]   globalMinimum;
+        private int     minIteration = 0;
+        private int     currentIteration;
         private Random rand = new Random();
+		private ArrayList<String> result;
 
         private List<Integer> base = new ArrayList<Integer>();
 
@@ -25,7 +26,7 @@ public class CockroachNest {
                 this.numOfIterations = numOfIterations;
                 this.stepLength = stepLength;
                 this.visibilityRange = visibilityRange;
-        
+				this.result = new ArrayList<String>();
         }
         
         public CockroachNest(Graph graph){
@@ -45,7 +46,7 @@ public class CockroachNest {
                 this.visibilityRange = visibilityRange;
         }
         
-        // generates random permutation of points
+        // generates random permutation of points 
         private int[] getRandomPermutation() {
                 int[] res = new int[this.numOfPoints];
                 List<Integer> toShuffle = new ArrayList<Integer>();
@@ -183,7 +184,7 @@ public class CockroachNest {
                 beRuthless();
         }
 
-        public void solve() {
+        public ArrayList<String> solve() {
                 generateNest();
 
                 this.globalMinimum = Arrays.copyOf(this.currentSolution[0],this.numOfPoints);
@@ -193,12 +194,20 @@ public class CockroachNest {
                         }
 
                 }
+                int minimal = 0;
                 for (this.currentIteration = 0; this.currentIteration < this.numOfIterations; this.currentIteration += 1) {
                         doIteration();
-                        System.out.println(this.currentIteration + " Minimalna: "+ this.minIteration + " Rozwi¹zanie: "+ this.graph.getSolution(this.globalMinimum));
+                        if (this.minIteration != minimal){
+								String line = this.currentIteration + " Minimalna: "+ this.minIteration + " Rozwi1zanie: "+ this.graph.getSolution(this.globalMinimum) + " -> ";
+                                for (int i = 0; i < this.globalMinimum.length; i++){
+                                        line = line.concat(this.globalMinimum[i]+ " ");
+                                }
+                                minimal = this.minIteration;
+                                result.add(line);
+                        }
                 }
                 
-                
+                return result;
                 //return new Result(this.globalMinimum, this.minIteration);
         }
 

@@ -81,26 +81,29 @@ public class Komi {
 		}
 	}
 	
-	public void mrowkowy(int ilMrowek, int ilIteracji){
+	public ArrayList<String> mrowkowy(int ilMrowek, int ilIteracji){
 		TSP problem = new TSP(ilMrowek);
 		long start = System.currentTimeMillis();
-		problem.solve(ilIteracji);
-		System.out.println("Time spent: " + (System.currentTimeMillis() - start) + " ms.");
+		ArrayList<String> result = problem.solve(ilIteracji);
+		result.add("Time spent: " + (System.currentTimeMillis() - start) + " ms.");
+		return result;
 	}
 	
-	public void karaluch(int ilKaraluchow, int zasiegWidocznosci, int dlugoscKroku, int iloscIteracji){
+	public ArrayList<String> karaluch(int ilKaraluchow, int zasiegWidocznosci, int dlugoscKroku, int iloscIteracji){
 		File directory = new File (".");
         Road2 road = new Road2();
+        ArrayList<String> result = null;
         Graph graph;
         try {
                 graph = road.getWeightsFromFile(directory.getCanonicalPath() + "//out.txt");
                 CockroachNest problem = new CockroachNest(graph, ilKaraluchow,zasiegWidocznosci,dlugoscKroku,iloscIteracji);
                 long start = System.currentTimeMillis();
-                problem.solve();
-                System.out.println("Time spent: " + (System.currentTimeMillis() - start) + " ms.");
+                result = problem.solve();
+                result.add("Time spent: " + (System.currentTimeMillis() - start) + " ms.");
         } catch (IOException e) {
                 e.printStackTrace();
         } 
+        return result;
 	}
 
 	public void open() {
@@ -269,8 +272,21 @@ public class Komi {
 				waga = scale.getSelection();
 				
 			//	wczytajDane();
-				mrowkowy(ilMrowek, iloscIteracjiMr);
-				karaluch(ilKaraluchow, zasiegWidocznosci, dlugoscKroku, iloscIteracji);
+				ArrayList<String> mrowkowyResult = mrowkowy(ilMrowek, iloscIteracjiMr);
+				ArrayList<String> karaluchResult = karaluch(ilKaraluchow, zasiegWidocznosci, dlugoscKroku, iloscIteracji);
+				
+				String mrowkowyFinal = "", karaluchFinal = "";
+				
+				for(String s: mrowkowyResult) {
+					mrowkowyFinal = mrowkowyFinal.concat(s + "\n");
+				}
+				for(String s: karaluchResult) {
+					karaluchFinal = karaluchFinal.concat(s + "\n");
+				}
+				
+				ResultShell resultShell = new ResultShell(Display.getCurrent());
+				resultShell.setResults(mrowkowyFinal, karaluchFinal);
+				resultShell.open();
 			}
 		});
 		btnOblicz.setBounds(530, 437, 87, 40);

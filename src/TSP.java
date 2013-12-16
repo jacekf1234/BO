@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.concurrent.*;
 
 public class TSP {
@@ -15,9 +16,11 @@ public class TSP {
     private double bestCost = 0;
     private Ant[] ants;
     private Road road;
+    private ArrayList<String> result;
 
     public TSP(int antsNumber) {
         road = new Road();
+        result = new ArrayList<String>();
         weights = road.getWeightsFromFile("out.txt");
         this.INIT_PHEROMONE = Q / Road.avarageDistance;
         this.antsNumber = antsNumber;
@@ -41,7 +44,7 @@ public class TSP {
         }
     }
 
-    public void solve(int iterNumber) {
+    public ArrayList<String> solve(int iterNumber) {
         ExecutorService taskExecutor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         CompletionService<Ant> taskCompletionService = new ExecutorCompletionService<Ant>(
                 taskExecutor);
@@ -65,18 +68,20 @@ public class TSP {
             updatePheromone();
         }
         taskExecutor.shutdown();
+        
+        return result;
     }
 
     private void updateBestCost(double currentCost, int[] currentPath, int iter) {
         if (bestPath.length == 0 || bestCost > currentCost) {
             bestCost = currentCost;
             bestPath = currentPath;
-            System.out.println("New best cost = " + bestCost
-                    + " was found in iteration nr: " + iter);
+            result.add("New best cost = " + bestCost);
+            String line = "";
             for (int j = 0; j < currentPath.length; j++) {
-                System.out.print((currentPath[j]) + " ");
+            	line = line.concat("" + (currentPath[j]) + " ");
             }
-            System.out.println();
+            result.add(line);
         }
     }
 
