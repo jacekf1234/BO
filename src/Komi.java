@@ -120,136 +120,144 @@ public class Komi {
 
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(854, 520);
-		shell.setText("SWT Application");
-		
-		Label lblTytul = new Label(shell, SWT.NONE);
-		lblTytul.setAlignment(SWT.CENTER);
-		lblTytul.setFont(SWTResourceManager.getFont("Ubuntu", 18, SWT.NORMAL));
-		lblTytul.setBounds(72, 10, 352, 32);
-		lblTytul.setText("Wyznaczanie trasy");
-		
-		final Button btnAlgorytmMrwkowy = new Button(shell, SWT.CHECK);
-		btnAlgorytmMrwkowy.setSelection(true);
-		btnAlgorytmMrwkowy.setBounds(10, 48, 202, 24);
-		btnAlgorytmMrwkowy.setText("algorytm mr贸wkowy");
-		
-		final Button btnAlgorytmKaralucha = new Button(shell, SWT.CHECK);
-		btnAlgorytmKaralucha.setBounds(10, 260, 166, 24);
-		btnAlgorytmKaralucha.setText("algorytm karalucha");
-		
-		Label lblIloscMrowek = new Label(shell, SWT.NONE);
-		lblIloscMrowek.setBounds(10, 78, 121, 24);
-		lblIloscMrowek.setText("Ilo艣膰 mr贸wek");
-		
-		final Spinner spinIloscMrowek = new Spinner(shell, SWT.BORDER);
-		spinIloscMrowek.setIncrement(1);
-		spinIloscMrowek.setPageIncrement(100);
-		spinIloscMrowek.setMaximum(1000000);
-		spinIloscMrowek.setMinimum(1);
-		spinIloscMrowek.setSelection(200);
-		spinIloscMrowek.setBounds(137, 78, 87, 24);
-		
-		Label lblIloscIteracjiMr = new Label(shell, SWT.NONE);
-		lblIloscIteracjiMr.setText("Ilo艣膰 iteracji");
-		lblIloscIteracjiMr.setBounds(10, 108, 121, 24);
-		
-		final Spinner spinIloscIteracjiMr = new Spinner(shell, SWT.BORDER);
-		spinIloscIteracjiMr.setIncrement(1);
-		spinIloscIteracjiMr.setPageIncrement(100);
-		spinIloscIteracjiMr.setMaximum(1000000);
-		spinIloscIteracjiMr.setMinimum(1);
-		spinIloscIteracjiMr.setSelection(100);
-		spinIloscIteracjiMr.setBounds(137, 108, 87, 24);		
-		
-		Label lblWspczynnikAlfa = new Label(shell, SWT.NONE);
-		lblWspczynnikAlfa.setBounds(10, 138, 121, 24);
-		lblWspczynnikAlfa.setText("Wsp贸艂czynnik alfa");
-		
-		final Spinner spinWspolczynnikAlfa = new Spinner(shell, SWT.BORDER);
-		spinWspolczynnikAlfa.setMaximum(20);
-		spinWspolczynnikAlfa.setBounds(137, 138, 87, 24);
-		
-		Label lblWspczynnikBeta = new Label(shell, SWT.NONE);
-		lblWspczynnikBeta.setBounds(10, 168, 121, 24);
-		lblWspczynnikBeta.setText("Wsp贸艂czynnik beta");
-		
-		final Spinner spinWspolczynnikBeta = new Spinner(shell, SWT.BORDER);
-		spinWspolczynnikBeta.setMaximum(20);
-		spinWspolczynnikBeta.setBounds(137, 168, 87, 24);
-		
-		Label lblIntensywnoscFeromonu = new Label(shell, SWT.NONE);
-		lblIntensywnoscFeromonu.setBounds(10, 198, 121, 40);
-		lblIntensywnoscFeromonu.setText("Odparowywanie\n feromonu");
-		
-		final Spinner spinIntensywnoscFeromonu = new Spinner(shell, SWT.BORDER);
-		spinIntensywnoscFeromonu.setMinimum(0);
-		spinIntensywnoscFeromonu.setMaximum(1);
-		spinIntensywnoscFeromonu.setBounds(137, 198, 87, 24);
-		
-		
-		Label lblMinimalizuj = new Label(shell, SWT.NONE);
-		lblMinimalizuj.setFont(SWTResourceManager.getFont("Ubuntu", 12, SWT.NORMAL));
-		lblMinimalizuj.setBounds(10, 437, 100, 32);
-		lblMinimalizuj.setText("Minimalizuj:");
-		
-		Label lblIloscKaraluchow = new Label(shell, SWT.NONE);
-		lblIloscKaraluchow.setBounds(10, 290, 119, 27);
-		lblIloscKaraluchow.setText("Ilo艣膰 karaluch贸w");
-		
-		final Spinner spinIloscKaraluchow = new Spinner(shell, SWT.BORDER);
-		spinIloscKaraluchow.setIncrement(10);
-		spinIloscKaraluchow.setMaximum(1000000);
-		spinIloscKaraluchow.setMinimum(1);
-		spinIloscKaraluchow.setSelection(100);
-		spinIloscKaraluchow.setBounds(137, 323, 87, 27);
-		
-		Label lblDlugoscKroku = new Label(shell, SWT.NONE);
-		lblDlugoscKroku.setBounds(10, 389, 119, 27);
-		lblDlugoscKroku.setText("D艂ugo艣膰 kroku");
-		
-		final Spinner spinDlugoscKroku = new Spinner(shell, SWT.BORDER);
-		spinDlugoscKroku.setIncrement(1);
-		spinDlugoscKroku.setMaximum(1000);
-		spinDlugoscKroku.setMinimum(1);
-		spinDlugoscKroku.setSelection(2);
-		spinDlugoscKroku.setBounds(137, 389, 87, 27);
-		
-		Label lblZasiegWidocznosci = new Label(shell, SWT.NONE);
-		lblZasiegWidocznosci.setBounds(10, 356, 119, 24);
-		lblZasiegWidocznosci.setText("Zasi臋g widoczno艣ci");
-		
-		final Spinner spinZasiegWidocznosci = new Spinner(shell, SWT.BORDER);
-		spinZasiegWidocznosci.setIncrement(1);
-		spinZasiegWidocznosci.setMaximum(1000);
-		spinZasiegWidocznosci.setMinimum(1);
-		spinZasiegWidocznosci.setSelection(3);
-		spinZasiegWidocznosci.setBounds(137, 356, 87, 27);
-		
-		Label lblIloscIteracji = new Label(shell, SWT.NONE);
-		lblIloscIteracji.setBounds(10, 323, 119, 27);
-		lblIloscIteracji.setText("Ilo艣膰 iteracji");
-		
-		final Spinner spinIloscIteracji = new Spinner(shell, SWT.BORDER);
-		spinIloscIteracji.setIncrement(1);
-		spinIloscIteracji.setPageIncrement(100);
-		spinIloscIteracji.setMaximum(1000000);
-		spinIloscIteracji.setMinimum(1);
-		spinIloscIteracji.setSelection(100);
-		spinIloscIteracji.setBounds(137, 290, 87, 27);
-		
-		final Scale scale = new Scale(shell, SWT.NONE);
-		scale.setBounds(116, 422, 178, 32);
-		
-		Label lblCzas = new Label(shell, SWT.NONE);
-		lblCzas.setAlignment(SWT.CENTER);
-		lblCzas.setBounds(94, 460, 70, 17);
-		lblCzas.setText("Czas");
-		
-		Label lblKoszty = new Label(shell, SWT.NONE);
-		lblKoszty.setAlignment(SWT.CENTER);
-		lblKoszty.setBounds(249, 460, 70, 17);
-		lblKoszty.setText("Koszty");
+        shell.setSize(854, 520);
+        shell.setText("SWT Application");
+        
+        Label lblTytul = new Label(shell, SWT.NONE);
+        lblTytul.setAlignment(SWT.CENTER);
+        lblTytul.setFont(SWTResourceManager.getFont("Ubuntu", 18, SWT.NORMAL));
+        lblTytul.setBounds(72, 10, 352, 32);
+        lblTytul.setText("Wyznaczanie trasy");
+        
+        final Button btnAlgorytmMrwkowy = new Button(shell, SWT.CHECK);
+        btnAlgorytmMrwkowy.setSelection(true);
+        btnAlgorytmMrwkowy.setBounds(10, 48, 202, 24);
+        btnAlgorytmMrwkowy.setText("algorytm mr體kowy");
+        
+        final Button btnAlgorytmKaralucha = new Button(shell, SWT.CHECK);
+        btnAlgorytmKaralucha.setBounds(10, 260, 166, 24);
+        btnAlgorytmKaralucha.setText("algorytm karalucha");
+        
+        Label lblIloscMrowek = new Label(shell, SWT.NONE);
+        lblIloscMrowek.setBounds(10, 78, 121, 24);
+        lblIloscMrowek.setText("Ilo滄 mr體ek");
+        
+        final Spinner spinIloscMrowek = new Spinner(shell, SWT.BORDER);
+        spinIloscMrowek.setIncrement(1);
+        spinIloscMrowek.setPageIncrement(100);
+        spinIloscMrowek.setMaximum(1000000);
+        spinIloscMrowek.setMinimum(1);
+        spinIloscMrowek.setSelection(200);
+        spinIloscMrowek.setBounds(137, 78, 87, 24);
+        
+        Label lblIloscIteracjiMr = new Label(shell, SWT.NONE);
+        lblIloscIteracjiMr.setText("Ilo滄 iteracji");
+        lblIloscIteracjiMr.setBounds(10, 108, 121, 24);
+        
+        final Spinner spinIloscIteracjiMr = new Spinner(shell, SWT.BORDER);
+        spinIloscIteracjiMr.setIncrement(1);
+        spinIloscIteracjiMr.setPageIncrement(100);
+        spinIloscIteracjiMr.setMaximum(1000000);
+        spinIloscIteracjiMr.setMinimum(1);
+        spinIloscIteracjiMr.setSelection(100);
+        spinIloscIteracjiMr.setBounds(137, 108, 87, 24);        
+        
+        Label lblWspczynnikAlfa = new Label(shell, SWT.NONE);
+        lblWspczynnikAlfa.setBounds(10, 138, 121, 24);
+        lblWspczynnikAlfa.setText("Wsp蟪czynnik alfa");
+        
+        final Spinner spinWspolczynnikAlfa = new Spinner(shell, SWT.BORDER);
+        spinWspolczynnikAlfa.setIncrement(1);
+        spinWspolczynnikAlfa.setMinimum(1);
+        spinWspolczynnikAlfa.setSelection(2);
+        spinWspolczynnikAlfa.setMaximum(200);
+        spinWspolczynnikAlfa.setBounds(137, 138, 87, 24);
+        
+        Label lblWspczynnikBeta = new Label(shell, SWT.NONE);
+        lblWspczynnikBeta.setBounds(10, 168, 121, 24);
+        lblWspczynnikBeta.setText("Wsp蟪czynnik beta");
+        
+        final Spinner spinWspolczynnikBeta = new Spinner(shell, SWT.BORDER);
+        spinWspolczynnikBeta.setIncrement(1);
+        spinWspolczynnikBeta.setMinimum(1);
+        spinWspolczynnikBeta.setSelection(96);
+        spinWspolczynnikBeta.setMaximum(200);
+        spinWspolczynnikBeta.setBounds(137, 168, 87, 24);
+        
+        Label lblIntensywnoscFeromonu = new Label(shell, SWT.NONE);
+        lblIntensywnoscFeromonu.setBounds(10, 198, 121, 40);
+        lblIntensywnoscFeromonu.setText("Odparowywanie\n feromonu");
+        
+        final Spinner spinIntensywnoscFeromonu = new Spinner(shell, SWT.BORDER);
+        spinIntensywnoscFeromonu.setIncrement(1);
+        spinIntensywnoscFeromonu.setMinimum(0);
+        spinIntensywnoscFeromonu.setSelection(1);
+        spinIntensywnoscFeromonu.setMaximum(10);
+        spinIntensywnoscFeromonu.setBounds(137, 198, 87, 24);
+        
+        
+        Label lblMinimalizuj = new Label(shell, SWT.NONE);
+        lblMinimalizuj.setFont(SWTResourceManager.getFont("Ubuntu", 12, SWT.NORMAL));
+        lblMinimalizuj.setBounds(10, 437, 100, 32);
+        lblMinimalizuj.setText("Minimalizuj:");
+        
+        Label lblIloscKaraluchow = new Label(shell, SWT.NONE);
+        lblIloscKaraluchow.setBounds(10, 290, 119, 27);
+        lblIloscKaraluchow.setText("Ilo滄 karaluch體");
+        
+        final Spinner spinIloscKaraluchow = new Spinner(shell, SWT.BORDER);
+        spinIloscKaraluchow.setIncrement(10);
+        spinIloscKaraluchow.setMaximum(1000000);
+        spinIloscKaraluchow.setMinimum(1);
+        spinIloscKaraluchow.setSelection(100);
+        spinIloscKaraluchow.setBounds(137, 323, 87, 27);
+        
+        Label lblDlugoscKroku = new Label(shell, SWT.NONE);
+        lblDlugoscKroku.setBounds(10, 389, 119, 27);
+        lblDlugoscKroku.setText("D硊go滄 kroku");
+        
+        final Spinner spinDlugoscKroku = new Spinner(shell, SWT.BORDER);
+        spinDlugoscKroku.setIncrement(1);
+        spinDlugoscKroku.setMaximum(1000);
+        spinDlugoscKroku.setMinimum(1);
+        spinDlugoscKroku.setSelection(2);
+        spinDlugoscKroku.setBounds(137, 389, 87, 27);
+        
+        Label lblZasiegWidocznosci = new Label(shell, SWT.NONE);
+        lblZasiegWidocznosci.setBounds(10, 356, 119, 24);
+        lblZasiegWidocznosci.setText("Zasi阦 widoczno渃i");
+        
+        final Spinner spinZasiegWidocznosci = new Spinner(shell, SWT.BORDER);
+        spinZasiegWidocznosci.setIncrement(1);
+        spinZasiegWidocznosci.setMaximum(1000);
+        spinZasiegWidocznosci.setMinimum(1);
+        spinZasiegWidocznosci.setSelection(3);
+        spinZasiegWidocznosci.setBounds(137, 356, 87, 27);
+        
+        Label lblIloscIteracji = new Label(shell, SWT.NONE);
+        lblIloscIteracji.setBounds(10, 323, 119, 27);
+        lblIloscIteracji.setText("Ilo滄 iteracji");
+        
+        final Spinner spinIloscIteracji = new Spinner(shell, SWT.BORDER);
+        spinIloscIteracji.setIncrement(1);
+        spinIloscIteracji.setPageIncrement(100);
+        spinIloscIteracji.setMaximum(1000000);
+        spinIloscIteracji.setMinimum(1);
+        spinIloscIteracji.setSelection(100);
+        spinIloscIteracji.setBounds(137, 290, 87, 27);
+        
+        final Scale scale = new Scale(shell, SWT.NONE);
+        scale.setBounds(116, 422, 178, 32);
+        
+        Label lblCzas = new Label(shell, SWT.NONE);
+        lblCzas.setAlignment(SWT.CENTER);
+        lblCzas.setBounds(94, 460, 70, 17);
+        lblCzas.setText("Czas");
+        
+        Label lblKoszty = new Label(shell, SWT.NONE);
+        lblKoszty.setAlignment(SWT.CENTER);
+        lblKoszty.setBounds(249, 460, 70, 17);
+        lblKoszty.setText("Koszty");
 		
 		Button btnOblicz = new Button(shell, SWT.NONE);
 		btnOblicz.addMouseListener(new MouseAdapter() {
