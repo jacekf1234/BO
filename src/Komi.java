@@ -81,7 +81,7 @@ public class Komi {
 		}
 	}
 	
-	public ArrayList<String> mrowkowy(int ilMrowek, int ilIteracji){
+	public ArrayList<String> mrowkowy(int ilMrowek, int ilIteracji, double alpha, double beta, double ro){
 		TSP problem = new TSP(ilMrowek);
 		long start = System.currentTimeMillis();
 		ArrayList<String> result = problem.solve(ilIteracji);
@@ -132,7 +132,7 @@ public class Komi {
         final Button btnAlgorytmMrwkowy = new Button(shell, SWT.CHECK);
         btnAlgorytmMrwkowy.setSelection(true);
         btnAlgorytmMrwkowy.setBounds(10, 48, 202, 24);
-        btnAlgorytmMrwkowy.setText("algorytm mrówkowy");
+        btnAlgorytmMrwkowy.setText("algorytm mrï¿½wkowy");
         
         final Button btnAlgorytmKaralucha = new Button(shell, SWT.CHECK);
         btnAlgorytmKaralucha.setBounds(10, 260, 166, 24);
@@ -140,7 +140,7 @@ public class Komi {
         
         Label lblIloscMrowek = new Label(shell, SWT.NONE);
         lblIloscMrowek.setBounds(10, 78, 121, 24);
-        lblIloscMrowek.setText("Iloœæ mrówek");
+        lblIloscMrowek.setText("Iloï¿½ï¿½ mrï¿½wek");
         
         final Spinner spinIloscMrowek = new Spinner(shell, SWT.BORDER);
         spinIloscMrowek.setIncrement(1);
@@ -151,7 +151,7 @@ public class Komi {
         spinIloscMrowek.setBounds(137, 78, 87, 24);
         
         Label lblIloscIteracjiMr = new Label(shell, SWT.NONE);
-        lblIloscIteracjiMr.setText("Iloœæ iteracji");
+        lblIloscIteracjiMr.setText("Iloï¿½ï¿½ iteracji");
         lblIloscIteracjiMr.setBounds(10, 108, 121, 24);
         
         final Spinner spinIloscIteracjiMr = new Spinner(shell, SWT.BORDER);
@@ -164,7 +164,7 @@ public class Komi {
         
         Label lblWspczynnikAlfa = new Label(shell, SWT.NONE);
         lblWspczynnikAlfa.setBounds(10, 138, 121, 24);
-        lblWspczynnikAlfa.setText("Wspó³czynnik alfa");
+        lblWspczynnikAlfa.setText("Wspï¿½czynnik alfa");
         
         final Spinner spinWspolczynnikAlfa = new Spinner(shell, SWT.BORDER);
         spinWspolczynnikAlfa.setIncrement(1);
@@ -175,7 +175,7 @@ public class Komi {
         
         Label lblWspczynnikBeta = new Label(shell, SWT.NONE);
         lblWspczynnikBeta.setBounds(10, 168, 121, 24);
-        lblWspczynnikBeta.setText("Wspó³czynnik beta");
+        lblWspczynnikBeta.setText("Wspï¿½czynnik beta");
         
         final Spinner spinWspolczynnikBeta = new Spinner(shell, SWT.BORDER);
         spinWspolczynnikBeta.setIncrement(1);
@@ -203,7 +203,7 @@ public class Komi {
         
         Label lblIloscKaraluchow = new Label(shell, SWT.NONE);
         lblIloscKaraluchow.setBounds(10, 290, 119, 27);
-        lblIloscKaraluchow.setText("Iloœæ karaluchów");
+        lblIloscKaraluchow.setText("Iloï¿½ï¿½ karaluchï¿½w");
         
         final Spinner spinIloscKaraluchow = new Spinner(shell, SWT.BORDER);
         spinIloscKaraluchow.setIncrement(10);
@@ -214,7 +214,7 @@ public class Komi {
         
         Label lblDlugoscKroku = new Label(shell, SWT.NONE);
         lblDlugoscKroku.setBounds(10, 389, 119, 27);
-        lblDlugoscKroku.setText("D³ugoœæ kroku");
+        lblDlugoscKroku.setText("Dï¿½ugoï¿½ï¿½ kroku");
         
         final Spinner spinDlugoscKroku = new Spinner(shell, SWT.BORDER);
         spinDlugoscKroku.setIncrement(1);
@@ -225,7 +225,7 @@ public class Komi {
         
         Label lblZasiegWidocznosci = new Label(shell, SWT.NONE);
         lblZasiegWidocznosci.setBounds(10, 356, 119, 24);
-        lblZasiegWidocznosci.setText("Zasiêg widocznoœci");
+        lblZasiegWidocznosci.setText("Zasiï¿½g widocznoï¿½ci");
         
         final Spinner spinZasiegWidocznosci = new Spinner(shell, SWT.BORDER);
         spinZasiegWidocznosci.setIncrement(1);
@@ -236,7 +236,7 @@ public class Komi {
         
         Label lblIloscIteracji = new Label(shell, SWT.NONE);
         lblIloscIteracji.setBounds(10, 323, 119, 27);
-        lblIloscIteracji.setText("Iloœæ iteracji");
+        lblIloscIteracji.setText("Iloï¿½ï¿½ iteracji");
         
         final Spinner spinIloscIteracji = new Spinner(shell, SWT.BORDER);
         spinIloscIteracji.setIncrement(1);

@@ -8,14 +8,17 @@ public class Ant implements Callable<Ant> {
     private int[] currentPath;
     private double[] probabilities;
     private double pathCost;
+    private double alpha, beta;
 
 
-    public Ant(double[][] pheromones, double[][] weights) {
+    public Ant(double[][] pheromones, double[][] weights, double alpha, double beta) {
         this.pheromones = pheromones;
         this.weights = weights;
         this.currentPath = new int[weights.length];
         this.probabilities = new double[weights.length];
         this.pathCost = 0;
+        this.alpha = alpha;
+        this.beta = beta;
     }
 
     public int[] findPath() {
@@ -51,8 +54,8 @@ public class Ant implements Callable<Ant> {
         for (int j = 0; j < visited.length; j++) {
             if (!visited[j]) {
                 probabilities[j] = Math.pow(pheromones[current][j],
-                        TSP.ALPHA)
-                        * Math.pow(1 / weights[current][j], TSP.BETA);
+                        alpha)
+                        * Math.pow(1 / weights[current][j], beta);
                 probability += probabilities[j];
             } else {
                 probabilities[j] = 0; // already visited city

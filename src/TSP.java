@@ -8,9 +8,9 @@ public class TSP {
     private double[][] pheromones;
     static final double Q = 1.0;
     private final int antsNumber;
-    static final double RO = 0.1;
-    static final double BETA = 9.6;
-    static final double ALPHA = 0.2;
+    private double ro = 0.1;
+    private double beta = 9.6;
+    private double alpha = 0.2;
     private final double INIT_PHEROMONE;
     private int[] bestPath = {};
     private double bestCost = 0;
@@ -18,7 +18,7 @@ public class TSP {
     private Road road;
     private ArrayList<String> result;
 
-    public TSP(int antsNumber) {
+    public TSP(int antsNumber, double alpha, double beta, double ro) {
         road = new Road();
         result = new ArrayList<String>();
         weights = road.getWeightsFromFile("out.txt");
@@ -26,12 +26,15 @@ public class TSP {
         this.antsNumber = antsNumber;
         initPheromone();
         initAnts();
+        this.alpha = alpha;
+        this.beta = beta;
+        this.ro = ro;
     }
 
     private void initAnts() {
         ants = new Ant[antsNumber];
         for (int i = 0; i < antsNumber; i++) {
-            ants[i] = new Ant(pheromones, weights);
+            ants[i] = new Ant(pheromones, weights, alpha, beta);
         }
     }
 
@@ -89,7 +92,7 @@ public class TSP {
         for (int i = 0; i < pheromones.length; i++) {
             for (int j = 0; j < pheromones.length; j++) {
                 int sum = calculateSum(i, j);
-                pheromones[i][j] = pheromones[i][j] * (1.0 - TSP.RO) + sum;
+                pheromones[i][j] = pheromones[i][j] * (1.0 - ro) + sum;
             }
         }
     }
