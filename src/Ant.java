@@ -35,16 +35,15 @@ public class Ant implements Callable<Ant> {
     }
 
     private int selectNextCity(int length, boolean[] visited) {
-        double random = new Random().nextDouble();
-        double sum = 0.0;
+    	double prob = 0;
+        int index = 0;
         for (int j = 0; j < length; j++) {
-            sum += probabilities[j];
-            probabilities[j] = sum;
-            if (probabilities[j] >= random && !visited[j]) {
-                return j;
+            if ((probabilities[j] > prob) && (!visited[j])) {
+                index = j;
+                prob = probabilities[j];
             }
         }
-        return -1;
+        return index;
     }
 
     private void calculateProbabilities(boolean[] visited, int current) {
