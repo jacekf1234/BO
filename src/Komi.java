@@ -245,19 +245,6 @@ public class Komi {
         spinIloscIteracji.setMinimum(1);
         spinIloscIteracji.setSelection(100);
         spinIloscIteracji.setBounds(137, 290, 87, 27);
-        
-        final Scale scale = new Scale(shell, SWT.NONE);
-        scale.setBounds(116, 422, 178, 32);
-        
-        Label lblCzas = new Label(shell, SWT.NONE);
-        lblCzas.setAlignment(SWT.CENTER);
-        lblCzas.setBounds(94, 460, 70, 17);
-        lblCzas.setText("Czas");
-        
-        Label lblKoszty = new Label(shell, SWT.NONE);
-        lblKoszty.setAlignment(SWT.CENTER);
-        lblKoszty.setBounds(249, 460, 70, 17);
-        lblKoszty.setText("Koszty");
 		
 		Button btnOblicz = new Button(shell, SWT.NONE);
 		btnOblicz.addMouseListener(new MouseAdapter() {
@@ -277,10 +264,8 @@ public class Komi {
 				zasiegWidocznosci = spinZasiegWidocznosci.getSelection();
 				iloscIteracji = spinIloscIteracji.getSelection();
 				
-				waga = scale.getSelection();
-				
 			//	wczytajDane();
-				ArrayList<String> mrowkowyResult = mrowkowy(ilMrowek, iloscIteracjiMr);
+				ArrayList<String> mrowkowyResult = mrowkowy(ilMrowek, iloscIteracjiMr, wspAlfa, wspBeta, odparowywanieFeromonu);
 				ArrayList<String> karaluchResult = karaluch(ilKaraluchow, zasiegWidocznosci, dlugoscKroku, iloscIteracji);
 				
 				String mrowkowyFinal = "", karaluchFinal = "";
