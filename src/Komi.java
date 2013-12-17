@@ -1,9 +1,6 @@
-import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,21 +8,14 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Scale;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Canvas;
-import org.eclipse.swt.widgets.Slider;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -33,7 +23,6 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.PaintEvent;
-import org.eclipse.swt.graphics.GC;
 
 
 public class Komi {
@@ -82,7 +71,7 @@ public class Komi {
 	}
 	
 	public ArrayList<String> mrowkowy(int ilMrowek, int ilIteracji, double alpha, double beta, double ro){
-		TSP problem = new TSP(ilMrowek);
+		TSP problem = new TSP(ilMrowek, alpha, beta, ro);
 		long start = System.currentTimeMillis();
 		ArrayList<String> result = problem.solve(ilIteracji);
 		result.add("Time spent: " + (System.currentTimeMillis() - start) + " ms.");
@@ -132,7 +121,7 @@ public class Komi {
         final Button btnAlgorytmMrwkowy = new Button(shell, SWT.CHECK);
         btnAlgorytmMrwkowy.setSelection(true);
         btnAlgorytmMrwkowy.setBounds(10, 48, 202, 24);
-        btnAlgorytmMrwkowy.setText("algorytm mr�wkowy");
+        btnAlgorytmMrwkowy.setText("algorytm mrowkowy");
         
         final Button btnAlgorytmKaralucha = new Button(shell, SWT.CHECK);
         btnAlgorytmKaralucha.setBounds(10, 260, 166, 24);
@@ -140,7 +129,7 @@ public class Komi {
         
         Label lblIloscMrowek = new Label(shell, SWT.NONE);
         lblIloscMrowek.setBounds(10, 78, 121, 24);
-        lblIloscMrowek.setText("Ilo�� mr�wek");
+        lblIloscMrowek.setText("Ilosc mrowek");
         
         final Spinner spinIloscMrowek = new Spinner(shell, SWT.BORDER);
         spinIloscMrowek.setIncrement(1);
@@ -151,7 +140,7 @@ public class Komi {
         spinIloscMrowek.setBounds(137, 78, 87, 24);
         
         Label lblIloscIteracjiMr = new Label(shell, SWT.NONE);
-        lblIloscIteracjiMr.setText("Ilo�� iteracji");
+        lblIloscIteracjiMr.setText("Ilosc iteracji");
         lblIloscIteracjiMr.setBounds(10, 108, 121, 24);
         
         final Spinner spinIloscIteracjiMr = new Spinner(shell, SWT.BORDER);
@@ -164,7 +153,7 @@ public class Komi {
         
         Label lblWspczynnikAlfa = new Label(shell, SWT.NONE);
         lblWspczynnikAlfa.setBounds(10, 138, 121, 24);
-        lblWspczynnikAlfa.setText("Wsp�czynnik alfa");
+        lblWspczynnikAlfa.setText("Wspolczynnik alfa");
         
         final Spinner spinWspolczynnikAlfa = new Spinner(shell, SWT.BORDER);
         spinWspolczynnikAlfa.setIncrement(1);
@@ -175,7 +164,7 @@ public class Komi {
         
         Label lblWspczynnikBeta = new Label(shell, SWT.NONE);
         lblWspczynnikBeta.setBounds(10, 168, 121, 24);
-        lblWspczynnikBeta.setText("Wsp�czynnik beta");
+        lblWspczynnikBeta.setText("Wspolczynnik beta");
         
         final Spinner spinWspolczynnikBeta = new Spinner(shell, SWT.BORDER);
         spinWspolczynnikBeta.setIncrement(1);
@@ -203,7 +192,7 @@ public class Komi {
         
         Label lblIloscKaraluchow = new Label(shell, SWT.NONE);
         lblIloscKaraluchow.setBounds(10, 290, 119, 27);
-        lblIloscKaraluchow.setText("Ilo�� karaluch�w");
+        lblIloscKaraluchow.setText("Ilosc karaluchow");
         
         final Spinner spinIloscKaraluchow = new Spinner(shell, SWT.BORDER);
         spinIloscKaraluchow.setIncrement(10);
@@ -214,7 +203,7 @@ public class Komi {
         
         Label lblDlugoscKroku = new Label(shell, SWT.NONE);
         lblDlugoscKroku.setBounds(10, 389, 119, 27);
-        lblDlugoscKroku.setText("D�ugo�� kroku");
+        lblDlugoscKroku.setText("Dlugosc kroku");
         
         final Spinner spinDlugoscKroku = new Spinner(shell, SWT.BORDER);
         spinDlugoscKroku.setIncrement(1);
@@ -225,7 +214,7 @@ public class Komi {
         
         Label lblZasiegWidocznosci = new Label(shell, SWT.NONE);
         lblZasiegWidocznosci.setBounds(10, 356, 119, 24);
-        lblZasiegWidocznosci.setText("Zasi�g widoczno�ci");
+        lblZasiegWidocznosci.setText("Zasieg widocznosci");
         
         final Spinner spinZasiegWidocznosci = new Spinner(shell, SWT.BORDER);
         spinZasiegWidocznosci.setIncrement(1);
@@ -236,7 +225,7 @@ public class Komi {
         
         Label lblIloscIteracji = new Label(shell, SWT.NONE);
         lblIloscIteracji.setBounds(10, 323, 119, 27);
-        lblIloscIteracji.setText("Ilo�� iteracji");
+        lblIloscIteracji.setText("Ilosc iteracji");
         
         final Spinner spinIloscIteracji = new Spinner(shell, SWT.BORDER);
         spinIloscIteracji.setIncrement(1);

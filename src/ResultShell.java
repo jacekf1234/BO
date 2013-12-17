@@ -1,12 +1,7 @@
-import java.util.ArrayList;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.jface.text.TextViewer;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
 
