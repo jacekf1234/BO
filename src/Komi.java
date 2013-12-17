@@ -373,44 +373,4 @@ public class Komi {
 		btnLoad.setText("Wczytaj");
 
 	}
-	
-	public int getIlMrowek(){
-		return ilMrowek;
-	}
-	
-	public double getIloscIteracjiMr(){
-		return iloscIteracjiMr;
-	}
-	
-	public double getAlfa(){
-		return wspAlfa;
-	}
-	
-	public double getBeta(){
-		return wspBeta;
-	}
-	
-	public double getOdparowywanieFeromonu(){
-		return odparowywanieFeromonu;
-	}
-	
-	public int getIlKaraluchow(){
-		return ilKaraluchow;
-	}
-	
-	public double getZasiegWidocznosci(){
-		return zasiegWidocznosci;
-	}
-	
-	public double getDlugoscKroku(){
-		return dlugoscKroku;
-	}
-	
-	public double getIloscIteracji(){
-		return iloscIteracji;
-	}
-	
-	public int getWaga(){
-		return waga;
-	}
 }
