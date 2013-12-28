@@ -1,35 +1,29 @@
 import java.util.Random;
-import java.util.concurrent.Callable;
 
-public class Ant implements Callable<Ant> {
+public class Ant{
     private int[] path;
-    private double[][] pheromones;
     private double[][] weights;
-    private int[] currentPath;
+    public int[] currentPath;
     private double[] probabilities;
     private double pathCost;
-    private double alpha, beta;
 
 
-    public Ant(double[][] pheromones, double[][] weights, double alpha, double beta) {
-        this.pheromones = pheromones;
+    public Ant(double[][] weights) {
         this.weights = weights;
         this.currentPath = new int[weights.length];
         this.probabilities = new double[weights.length];
         this.pathCost = 0;
-        this.alpha = alpha;
-        this.beta = beta;
     }
 
-    public int[] findPath() {
+    public int[] findPath(double [] [] pheromones) {
         int length = weights.length;
         boolean[] visited = new boolean[length];
         int current = new Random().nextInt(length);
         currentPath[0] = current;
         for (int i = 1; i < length; i++) {
             visited[current] = true;
-            calculateProbabilities(visited, current);
-            int nextToVisit = selectNextCity(length, visited);
+            calculateProbabilities(pheromones ,visited, current);
+            int nextToVisit = selectNextCity();
             currentPath[i] = nextToVisit;
             current = nextToVisit;
         }
@@ -37,27 +31,26 @@ public class Ant implements Callable<Ant> {
         return currentPath;
     }
 
-    private int selectNextCity(int length, boolean[] visited) {
-    	double prob = 0;
-        int index = 0;
-        for (int j = 0; j < length; j++) {
-            if ((probabilities[j] > prob) && (!visited[j])) {
-                index = j;
-                prob = probabilities[j];
-            }
-        }
-        return index;
+    private int selectNextCity() {
+        double[] cumul = new double[probabilities.length + 1];
+        for (int i = 0; i < probabilities.length; ++i)
+            cumul[i + 1] = cumul[i] + probabilities[i];
+        double p = new Random(0).nextDouble();
+        for (int i = 0; i < cumul.length - 1; ++i)
+            if (p >= cumul[i] && p < cumul[i + 1])
+                return i;
+        return -1;
     }
 
-    private void calculateProbabilities(boolean[] visited, int current) {
+    private void calculateProbabilities(double [] [] pheromones,boolean[] visited, int current) {
         double probability = 0;
         for (int j = 0; j < visited.length; j++) {
             if (!visited[j]) {
                 probabilities[j] = Math.pow(pheromones[current][j],
-                        alpha)
-                        * Math.pow(1 / weights[current][j], beta);
+                        TSP.ALPHA)
+                        * Math.pow(1 / weights[current][j], TSP.BETA);
                 probability += probabilities[j];
-            } else {
+            } else if(visited[j] || j == current){
                 probabilities[j] = 0; // already visited city
             }
         }
@@ -80,9 +73,10 @@ public class Ant implements Callable<Ant> {
         return pathCost;
     }
 
-    @Override
-    public Ant call() throws Exception {
-        this.findPath();
-        return this;
+    public void clear() {
+        this.currentPath = new int[weights.length];
+        this.probabilities = new double[weights.length];
+        this.pathCost = 0;
     }
+
 }
