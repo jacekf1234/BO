@@ -23,7 +23,7 @@ public class Ant{
         for (int i = 1; i < length; i++) {
             visited[current] = true;
             calculateProbabilities(pheromones ,visited, current);
-            int nextToVisit = selectNextCity();
+            int nextToVisit = selectNextCity(visited);
             currentPath[i] = nextToVisit;
             current = nextToVisit;
         }
@@ -31,15 +31,27 @@ public class Ant{
         return currentPath;
     }
 
-    private int selectNextCity() {
-        double[] cumul = new double[probabilities.length + 1];
-        for (int i = 0; i < probabilities.length; ++i)
-            cumul[i + 1] = cumul[i] + probabilities[i];
-        double p = new Random(0).nextDouble();
-        for (int i = 0; i < cumul.length - 1; ++i)
-            if (p >= cumul[i] && p < cumul[i + 1])
-                return i;
-        return -1;
+    private int selectNextCity(boolean [] visited) {
+        double sumProbability = 0.0;
+        for (int city = 0; city < visited.length; city++) {
+            if (!visited[city]) {
+                sumProbability += probabilities[city];
+            }
+        }
+        double rand = new Random().nextDouble() * sumProbability;
+
+        int nextCity = -1;
+        for (int next = 0; next < visited.length; next++) {
+            if (!visited[next]) {
+                nextCity = next;
+                rand -= probabilities[next];
+                if (rand < 0.0) {
+                    nextCity = next;
+                    break;
+                }
+            }
+        }
+        return nextCity;
     }
 
     private void calculateProbabilities(double [] [] pheromones,boolean[] visited, int current) {
@@ -53,9 +65,6 @@ public class Ant{
             } else if(visited[j] || j == current){
                 probabilities[j] = 0; // already visited city
             }
-        }
-        for (int j = 0; j < probabilities.length; j++) {
-            probabilities[j] /= probability;
         }
     }
 
