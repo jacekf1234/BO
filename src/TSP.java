@@ -1,4 +1,6 @@
-public class TSP extends Thread {
+import java.util.ArrayList;
+
+public class TSP{
 
     private double[][] weights;
     private double[][] pheromones;
@@ -13,21 +15,19 @@ public class TSP extends Thread {
     private Ant[] ants;
     private Road road;
     private int bestIter = 0;
-    private int iterNumber = 0;
+    private ArrayList<String> result;
 
-    public void run() {
-        solve(iterNumber);
-    }
 
-    public TSP(int antsNumber, double alpha, double beta, double ro, int iterNumber) {
+
+    public TSP(int antsNumber, double alpha, double beta, double ro ) {
         this.ALPHA = alpha;
         this.BETA = beta;
         this.RO = ro;
         this.antsNumber = antsNumber;
-        this.iterNumber = iterNumber;
 
+        this.result = new ArrayList<String>();
         road = new Road();
-        weights = road.getWeightsFromFile("test");
+        weights = road.getWeightsFromFile("out.txt");
         this.INIT_PHEROMONE = Q / Road.avarageDistance;
         initPheromone();
         initAnts();
@@ -49,19 +49,19 @@ public class TSP extends Thread {
         }
     }
 
-    public void solve(int iterNumber) {
+    public ArrayList<String> solve(int iterNumber) {
         for (int iter = 0; iter < iterNumber; iter++) {
             for (int i = 0; i < antsNumber; i++) {
                 ants[i].clear();
                 ants[i].findPath(pheromones);
             }
             updatePheromone();
-            updateBestCost(ants,iter);
+            updateBestCost(ants, iter);
         }
-        System.out.println(antsNumber + "\t" + ALPHA + "\t" + BETA + "\t" + RO + "\t" + iterNumber + "\t" + bestCost + "\t" + bestIter);
+        return result;
     }
 
-    private void updateBestCost(Ant[] ants,int iter) {
+    private void updateBestCost(Ant[] ants, int iter) {
         int[] currentPath = null;
         for (Ant ant : ants) {
             currentPath = ant.getPath();
@@ -70,10 +70,15 @@ public class TSP extends Thread {
                 bestCost = currentCost;
                 bestPath = currentPath;
                 bestIter = iter;
-            }
+                result.add("New best cost = " + bestCost);
+                String line = "";
+                for (int j = 0; j < currentPath.length; j++) {
+                    line = line.concat("" + (currentPath[j]) + " ");
+                }
+                result.add(line);
 
+            }
         }
-        System.out.println("Iteracja " + iter + " najlepszy wynik = " + bestCost);
     }
 
     private void updatePheromone() {
