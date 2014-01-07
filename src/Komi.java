@@ -249,8 +249,12 @@ public class Komi {
 					karaluchFinal = karaluchFinal.concat(s + "\n");
 				}
 				
+				String mrowkowyConf = "Ilosc mrowek: " + ilMrowek + "\nIlosc iteracji: " + iloscIteracjiMr + "\nWspolczynnik alfa: " + wspAlfa + "\nWspolczynnik beta: " + wspBeta + "\nOdparowywanie feromonu: " + odparowywanieFeromonu + "\n";
+
+				String karaluchConf = "Ilosc karaluchow: " + ilKaraluchow + "\nIlosc iteracji: " + iloscIteracji + "\nZasieg widocznosci: " + zasiegWidocznosci + "\nDlugosc kroku: " + dlugoscKroku + "\n";
+				
 				ResultShell resultShell = new ResultShell(Display.getCurrent());
-				resultShell.setResults(mrowkowyFinal, karaluchFinal);
+				resultShell.setResults(mrowkowyFinal, karaluchFinal, mrowkowyConf, karaluchConf);
 				resultShell.open();
 			}
 		});

@@ -45,7 +45,7 @@ public class ResultShell extends Shell {
 		
 		Label lblMrwkowy = new Label(this, SWT.NONE);
 		lblMrwkowy.setBounds(125, 25, 59, 15);
-		lblMrwkowy.setText("Mr\u00F3wkowy");
+		lblMrwkowy.setText("Mrowkowy");
 		
 		Label lblKaraluch = new Label(this, SWT.NONE);
 		lblKaraluch.setBounds(448, 25, 55, 15);
@@ -65,8 +65,8 @@ public class ResultShell extends Shell {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					BufferedWriter bw = new BufferedWriter(new FileWriter("results.txt"));
-					bw.write("Mrowkowy: \n" + text.getText() + '\n');
-					bw.write("Karaluch: \n" + text_1.getText());
+					bw.write("Mrowkowy:\n" + text.getText() + '\n');
+					bw.write("Karaluch:\n" + text_1.getText());
 					bw.close();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -87,13 +87,10 @@ public class ResultShell extends Shell {
 		setSize(650, 571);
 	}
 	
-	public void setResults(String mrowkowy, String karaluch) {
-
-		text.setText(mrowkowy);
-
-		text_1.setText(karaluch);
-
-	}
+	public void setResults(String mrowkowy, String karaluch, String mrowkowyConf, String karaluchConf) {
+        text.setText(mrowkowyConf + mrowkowy);
+        text_1.setText(karaluchConf + karaluch);
+}
 
 	@Override
 	protected void checkSubclass() {
