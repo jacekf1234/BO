@@ -38,7 +38,7 @@ public class Ant{
                 sumProbability += probabilities[city];
             }
         }
-        double rand = new Random().nextDouble() * sumProbability;
+        double rand = new Random().nextInt() * sumProbability;
 
         int nextCity = -1;
         for (int next = 0; next < visited.length; next++) {
