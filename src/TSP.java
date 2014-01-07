@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TSP{
+public class TSP {
 
     private double[][] weights;
     private double[][] pheromones;
@@ -18,8 +18,7 @@ public class TSP{
     private ArrayList<String> result;
 
 
-
-    public TSP(int antsNumber, double alpha, double beta, double ro ) {
+    public TSP(int antsNumber, double alpha, double beta, double ro) {
         this.ALPHA = alpha;
         this.BETA = beta;
         this.RO = ro;
@@ -50,6 +49,7 @@ public class TSP{
     }
 
     public ArrayList<String> solve(int iterNumber) {
+        long tStart = System.currentTimeMillis();
         for (int iter = 0; iter < iterNumber; iter++) {
             for (int i = 0; i < antsNumber; i++) {
                 ants[i].clear();
@@ -58,6 +58,10 @@ public class TSP{
             updatePheromone();
             updateBestCost(ants, iter);
         }
+        long tEnd = System.currentTimeMillis();
+        long tDelta = tEnd - tStart;
+        double time = tDelta / 1000.0;
+        result.add("Ilość mrówek\tAlfa\tBeta\tRO\tIlość iteracji\tWynik\tNumer iteracji\tCzas wykonania\n" + antsNumber + "\t" + ALPHA + "\t" + BETA + "\t" + RO + "\t" + iterNumber + "\t" + bestCost + "\t" + bestIter + "\t" + time);
         return result;
     }
 
@@ -70,13 +74,6 @@ public class TSP{
                 bestCost = currentCost;
                 bestPath = currentPath;
                 bestIter = iter;
-                result.add("New best cost = " + bestCost);
-                String line = "";
-                for (int j = 0; j < currentPath.length; j++) {
-                    line = line.concat("" + (currentPath[j]) + " ");
-                }
-                result.add(line);
-
             }
         }
     }
