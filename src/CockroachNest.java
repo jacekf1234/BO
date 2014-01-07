@@ -201,7 +201,7 @@ public class CockroachNest {
         long tEnd = System.currentTimeMillis();
         long tDelta = tEnd - tStart;
         double time = tDelta / 1000.0;
-        result.add("Ilość karaluchów\tZasięg widoczności\tDługość kroku\tIlość iteracji\tWynik\tNr iteracji\tCzas wykonania\n" + numOfCockroaches + "\t" + visibilityRange + "\t" + stepLength + "\t" + numOfIterations + "\t" + this.graph.getSolution(this.globalMinimum) + "\t" + this.minIteration + "\t" + time);
+        result.add("Wynik\t\t\t\t\tNr iteracji\tCzas wykonania\n" + this.graph.getSolution(this.globalMinimum) + "\t" + this.minIteration + "\t\t\t" + time);
         return result;
         //return new Result(this.globalMinimum, this.minIteration);
     }
