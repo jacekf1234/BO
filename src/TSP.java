@@ -61,7 +61,7 @@ public class TSP {
         long tEnd = System.currentTimeMillis();
         long tDelta = tEnd - tStart;
         double time = tDelta / 1000.0;
-        result.add("Wynik\t\t\t\t\tNr iteracji\tCzas wykonania\n" + bestCost + "\t" + bestIter + "\t\t\t" + time);
+        result.add("Wynik\t\t\t\t\tNr iteracji\tCzas wykonania\n" + bestCost + "\t" + bestIter + "\t\t\t" + time + "ms");
         return result;
     }
 

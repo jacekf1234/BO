@@ -74,7 +74,6 @@ public class Komi {
 		TSP problem = new TSP(ilMrowek, alpha, beta, ro);
 		long start = System.currentTimeMillis();
 		ArrayList<String> result = problem.solve(ilIteracji);
-		result.add("Time spent: " + (System.currentTimeMillis() - start) + " ms.");
 		return result;
 	}
 	
@@ -88,7 +87,6 @@ public class Komi {
                 CockroachNest problem = new CockroachNest(graph, ilKaraluchow,zasiegWidocznosci,dlugoscKroku,iloscIteracji);
                 long start = System.currentTimeMillis();
                 result = problem.solve();
-                result.add("Time spent: " + (System.currentTimeMillis() - start) + " ms.");
         } catch (IOException e) {
                 e.printStackTrace();
         } 
