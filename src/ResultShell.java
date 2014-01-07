@@ -1,8 +1,15 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 
 public class ResultShell extends Shell {
@@ -51,6 +58,24 @@ public class ResultShell extends Shell {
 		text_1 = new Text(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL | SWT.MULTI);
 		text_1.setEditable(false);
 		text_1.setBounds(324, 46, 300, 438);
+		
+		Button btnZapisz = new Button(this, SWT.NONE);
+		btnZapisz.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					BufferedWriter bw = new BufferedWriter(new FileWriter("results.txt"));
+					bw.write("Mrowkowy: \n" + text.getText() + '\n');
+					bw.write("Karaluch: \n" + text_1.getText());
+					bw.close();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnZapisz.setBounds(549, 497, 75, 25);
+		btnZapisz.setText("Zapisz");
 		createContents();
 	}
 
@@ -59,7 +84,7 @@ public class ResultShell extends Shell {
 	 */
 	protected void createContents() {
 		setText("Wyniki");
-		setSize(650, 533);
+		setSize(650, 571);
 	}
 	
 	public void setResults(String mrowkowy, String karaluch) {

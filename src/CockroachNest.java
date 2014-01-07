@@ -198,7 +198,7 @@ public class CockroachNest {
                 for (this.currentIteration = 0; this.currentIteration < this.numOfIterations; this.currentIteration += 1) {
                         doIteration();
                         if (this.minIteration != minimal){
-								String line = this.currentIteration + " Minimalna: "+ this.minIteration + " Rozwi1zanie: "+ this.graph.getSolution(this.globalMinimum) + " -> ";
+								String line = "Minimalna: "+ this.minIteration + " Rozwiazanie: "+ this.graph.getSolution(this.globalMinimum) + " -> ";
                                 for (int i = 0; i < this.globalMinimum.length; i++){
                                         line = line.concat(this.globalMinimum[i]+ " ");
                                 }

@@ -118,15 +118,6 @@ public class Komi {
         lblTytul.setBounds(72, 10, 352, 32);
         lblTytul.setText("Wyznaczanie trasy");
         
-        final Button btnAlgorytmMrwkowy = new Button(shell, SWT.CHECK);
-        btnAlgorytmMrwkowy.setSelection(true);
-        btnAlgorytmMrwkowy.setBounds(10, 48, 202, 24);
-        btnAlgorytmMrwkowy.setText("algorytm mrowkowy");
-        
-        final Button btnAlgorytmKaralucha = new Button(shell, SWT.CHECK);
-        btnAlgorytmKaralucha.setBounds(10, 260, 166, 24);
-        btnAlgorytmKaralucha.setText("algorytm karalucha");
-        
         Label lblIloscMrowek = new Label(shell, SWT.NONE);
         lblIloscMrowek.setBounds(10, 78, 121, 24);
         lblIloscMrowek.setText("Ilosc mrowek");
@@ -184,12 +175,6 @@ public class Komi {
         spinIntensywnoscFeromonu.setMaximum(10);
         spinIntensywnoscFeromonu.setBounds(137, 198, 87, 24);
         
-        
-        Label lblMinimalizuj = new Label(shell, SWT.NONE);
-        lblMinimalizuj.setFont(SWTResourceManager.getFont("Ubuntu", 12, SWT.NORMAL));
-        lblMinimalizuj.setBounds(10, 437, 100, 32);
-        lblMinimalizuj.setText("Minimalizuj:");
-        
         Label lblIloscKaraluchow = new Label(shell, SWT.NONE);
         lblIloscKaraluchow.setBounds(10, 290, 119, 27);
         lblIloscKaraluchow.setText("Ilosc karaluchow");
@@ -239,8 +224,6 @@ public class Komi {
 		btnOblicz.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-				isMrowki = btnAlgorytmMrwkowy.getSelection();
-				isKaraluch = btnAlgorytmKaralucha.getSelection();
 				
 				ilMrowek = spinIloscMrowek.getSelection();
 				iloscIteracjiMr = spinIloscIteracjiMr.getSelection();
